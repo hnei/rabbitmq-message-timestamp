@@ -14,4 +14,4 @@
 %% Copyright (c) 2007-2020 VMware, Inc. or its affiliates.  All rights reserved.
 %%
 
--define(TIMESTAMP_IN_MS, <<"timestamp_in_ms">>).
+-define(TIMESTAMP_IN_NS, <<"timestamp_in_ns">>).

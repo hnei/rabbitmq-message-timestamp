@@ -94,8 +94,8 @@ timestamp_test(Config) ->
          ?assertNotEqual(get_timestamp(Msg), undefined),
          ?assert(is_integer(get_timestamp(Msg))),
          ?assert(get_timestamp(Msg) > 0),
-         ?assertNotEqual(get_single_header(?TIMESTAMP_IN_MS, Msg), false),
-         ?assert(get_single_header(?TIMESTAMP_IN_MS, Msg) > 0)
+         ?assertNotEqual(get_single_header(?TIMESTAMP_IN_NS, Msg), false),
+         ?assert(get_single_header(?TIMESTAMP_IN_NS, Msg) > 0)
      end|| Msg <- Result],
 
     amqp_channel:call(Chan, delete_queue(Q)),

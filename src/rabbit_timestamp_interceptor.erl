@@ -47,9 +47,9 @@ description() ->
 intercept(#'basic.publish'{} = Method, Content, _IState) ->
     DecodedContent = rabbit_binary_parser:ensure_content_decoded(Content),
     Timestamp = os:system_time(seconds),
-    TimestampMs = os:system_time(milli_seconds),
+    TimestampNs = os:system_time(nano_seconds),
     Content2 = set_content_timestamp(DecodedContent, Timestamp),
-    Content3 = set_content_timestamp_millis(Content2, TimestampMs),
+    Content3 = set_content_timestamp_nanos(Content2, TimestampNs),
     {Method, Content3};
 
 intercept(Method, Content, _VHost) ->
@@ -72,14 +72,14 @@ set_content_timestamp(#content{properties = Props} = Content, Timestamp)
     Content#content{properties = Props#'P_basic'{timestamp = Timestamp},
                     properties_bin = none}.
 
-set_content_timestamp_millis(#content{properties = #'P_basic'{headers = Headers} = Props} = Content, TimestampMs) ->
-  case header(?TIMESTAMP_IN_MS, Headers) of
+set_content_timestamp_nanos(#content{properties = #'P_basic'{headers = Headers} = Props} = Content, TimestampNs) ->
+  case header(?TIMESTAMP_IN_NS, Headers) of
     undefined ->
       Content#content{
-        properties = Props#'P_basic'{headers = add_header(Headers, {?TIMESTAMP_IN_MS, long, TimestampMs})},
+        properties = Props#'P_basic'{headers = add_header(Headers, {?TIMESTAMP_IN_NS, long, TimestampNs})},
         properties_bin = none
        };
-    %% Do not overwrite an existing TIMESTAMP_IN_MS.
+    %% Do not overwrite an existing TIMESTAMP_IN_NS.
     _ -> Content
   end.
 
