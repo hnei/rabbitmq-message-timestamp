@@ -1,3 +1,5 @@
+**Note: The purpose of this fork from [https://github.com/rabbitmq/rabbitmq-message-timestamp](https://github.com/rabbitmq/rabbitmq-message-timestamp) is to change the code to report time in nanoseconds instead of milliseconds**
+
 # RabbitMQ Message Timestamp Plugin #
 
 This plugin fills the `timestamp` property and `timestamp_in_ns` header of a message as it enters
@@ -24,6 +26,8 @@ about how to install plugins that do not ship with RabbitMQ.
 
 You can build and install it like any other plugin (see
 [the plugin development guide](https://www.rabbitmq.com/plugin-development.html)).
+
+(See specific instructions all in one place [here](HowToBuild.md).)
 
 ## Usage ##
 
